@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <div id="highscore">View Highscore</div>
+        <div id="highscore" class="nav">View Highscore</div>
         <div class="title">Code Quiz</div>
         <div class="time">Time Remaining: <span id="timer">60</span></div>
     </header>
@@ -17,7 +17,8 @@
     <!-- Initial text when loading page -->
     <section class="instructions">
         <h1>Coding Quiz Challenge</h1>
-        <p> Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds.</p>
+        <p> Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds.
+        </p>
         <button id="startQuiz">Start Quiz</button>
     </section>
 
@@ -45,7 +46,16 @@
             <button id="submit">Submit</button>
         </div>
         <button id="play-again">Take Quiz Again</button>
+    </section>
 
+    <!-- Get highscore when view highscore clicked-->
+    <section class="score">
+        <h2>Highscores</h2>
+        <div id="score-list"></div>
+        <div class="score-button">
+            <button id="back">Go Back</button>
+            <button id="clear">Clear Highscores</button>
+        </div>
     </section>
 
 </body>

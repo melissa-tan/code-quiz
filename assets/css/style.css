@@ -1,0 +1,109 @@
+:root{
+    --blue: #1e81b0;
+    --navy: #154c79;
+    --red: #FF0000;
+    --green: #00FF00;
+    --bg-dark: #063970;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+header{
+    background-color: var(--bg-dark);
+    color: white;
+    font-size: 1.5rem;
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.nav, .title, .time{
+    padding: 10px;
+}
+
+.nav{
+    text-decoration: underline;
+}
+
+.nav:hover{
+    color: #1e81b0;
+}
+
+.title{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Initial loading page styling */
+.instructions{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.instructions h1{
+    font-size: 3rem;
+    padding: 20px;
+}
+
+.instructions p{
+    font-size: 1.2rem;
+    padding: 20px;
+}
+
+.instructions button{
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #1e81b0;
+    border-radius: 5px;
+}
+
+.instructions button:hover{
+    background-color: var(--navy);
+    color: white;
+}
+
+/* Question page styling */
+.question{
+    text-align: justify;
+    margin: 5% 25%;
+    justify-items: center;
+    align-items: center;
+}
+
+#question-title{
+    text-align: center;
+    padding: 10px;
+}
+
+.question-content{
+    padding: 10px;
+    font-size: 1.1rem;
+    line-height: 25px;
+}
+
+.answer-button{
+    display: block;
+    margin: 10px 50px;
+    padding: 5px;
+    background-color: skyblue;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.answer-button:hover{
+    opacity: 0.7;
+}
+
+/* Complete quiz and name input styling */
+
+
+
+
+
