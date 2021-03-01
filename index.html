@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Quiz</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/script.js" defer></script>
 </head>
 <body>
     <header>
@@ -23,9 +24,9 @@
     </section>
 
     <!-- Quiz question layout -->
-    <section class="question">
+    <section class="question hide">
         <h2 id="question-title">QUESTION TITLE</h2>
-        <p class="question-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae quod odio eaque mollitia quibusdam quaerat expedita accusantium nesciunt excepturi, ipsum earum cumque consequatur ut ipsa alias nihil corrupti natus laborum.</p>
+        <div id="questions">Sample Question Here?</div>
         <section class="answer">
             <button id="a" class="answer-button">A. Choice A</button>
             <button id="b" class="answer-button">B. Choice B</button>
@@ -37,7 +38,7 @@
     </section>
 
     <!-- Results and name input -->
-    <section class="result">
+    <section class="result hide">
         <h2>All Done!</h2>
         <p id="result-score"></p>
         <div class="result-input">
@@ -49,7 +50,7 @@
     </section>
 
     <!-- Get highscore when view highscore clicked-->
-    <section class="score">
+    <section class="score hide">
         <h2>Highscores</h2>
         <div id="score-list"></div>
         <div class="score-button">

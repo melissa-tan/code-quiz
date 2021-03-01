@@ -12,6 +12,10 @@
     padding: 0;
 }
 
+.hide{
+    display: none;
+}
+
 /* Header Styling */
 header{
     background-color: var(--bg-dark);
@@ -82,7 +86,7 @@ header{
     padding: 10px;
 }
 
-.question-content{
+#questions{
     padding: 10px;
     font-size: 1.1rem;
     line-height: 25px;
