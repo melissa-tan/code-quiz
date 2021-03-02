@@ -1,4 +1,7 @@
 let highscore = 0;
+let initials = document.getElementById("result-name").value;
+let scoreArray = [];
+let user;
 
 /* const timer = 60;
 const timerCount;
@@ -11,7 +14,7 @@ const resultEl = document.querySelector(".result");
 const highscoreEl = document.querySelector(".score");
 const startQuizEl = document.getElementById("start-quiz");
 const questionNumber = document.querySelector("#question-title");
-const questionContentEl = document.getElementById("questions");
+const questionContentEl = document.querySelector(".question-content");
 const answerEl = document.querySelector(".answer");
 const answerButtonEl = document.querySelector(".answer-button");
 const optionAEl = document.querySelector("#a");
@@ -23,7 +26,8 @@ const resultScoreEl = document.querySelector("#result-score");
 const timerEl = document.querySelector("#timer");
 const scoreSubmitEl = document.querySelector("#submit");
 const viewHighscoreEl = document.querySelector("#highscore");
-let initials = document.getElementById("result-name").value;
+const scoreListEl = document.querySelector("#score-list");
+const clearScoreEl = document.querySelector("#clear");
 
 startQuizEl.addEventListener("click", startQuiz);
 optionAEl.addEventListener("click", selectAnswer);
@@ -31,6 +35,8 @@ optionBEl.addEventListener("click", selectAnswer);
 optionCEl.addEventListener("click", selectAnswer);
 optionDEl.addEventListener("click", selectAnswer);
 scoreSubmitEl.addEventListener("click", submitScore);
+viewHighscoreEl.addEventListener("click", viewHighscore);
+clearScoreEl.addEventListener("click", clearHighscore);
 
 /* Start quiz */
 function startTimer() {
@@ -87,10 +93,16 @@ function showQuestion(question){
 function selectAnswer(){
   const correct = questions[currentQuestionIndex].answer;
   if(this.id == correct){
-    answerResultEl.textContent = "Correct!"
+      answerResultEl.textContent = "Correct!";
+      setTimeout(function(){
+        answerResultEl.textContent = "";
+      }, 1000);
     highscore++;
   } else{
-    answerResultEl.textContent = "Wrong"
+    answerResultEl.textContent = "Wrong";
+      setTimeout(function(){
+        answerResultEl.textContent = "";
+      }, 1000);
   }
   
   currentQuestionIndex++;
@@ -102,7 +114,6 @@ function selectAnswer(){
     resultEl.classList.remove("hide");
     setScore();
   }
-
 }
 
 function setScore(){
@@ -110,12 +121,15 @@ function setScore(){
 }
 
 function submitScore(){
-  let scoreArray = [];
-  let initials = document.getElementById("result-name").value;
+    let initials = document.getElementById("result-name").value;
+  const user = {
+    name: initials,
+    score: highscore
+  }
   if(initials === ""){
     alert("Initials cannot be blank");
   } else{
-    localStorage.setItem("scoreArray", [initials, highscore]);
+    localStorage.setItem("user", JSON.stringify(user));
     resultEl.classList.add("hide");
     viewHighscore();
   }
@@ -124,9 +138,26 @@ function submitScore(){
 
 function viewHighscore(){
   highscoreEl.classList.remove("hide");
-  var storage = localStorage.getItem("scoreArray");
+  var storage = localStorage.getItem("user");
+  if (storage === null) {
+    storage = [];
+} else {
+    storage = JSON.parse(user);
+}
+/*   console.log(localStorage);
+  scoreListEl.textContent = localStorage;
+  for(i=0; i<scoreArray.length; i++){
+      scoreListEl.textContent = "User: " + initials + ", Score: " + highscore;
+  }
+  for (var key in localStorage) {
+    scoreListEl.textContent = "User: " + key + ", Score: " + localStorage[key];
+    console.log(name + ':' + score);
+  } */
   console.log(storage);
-  console.log(highscore);
+}
+
+function clearHighscore(){
+    localStorage.clear();
 }
 
 const questions = [
@@ -181,7 +212,7 @@ const questions = [
       answer:"a"
     },
     {
-      question:"Choose the correct HTML element for the leargest heading",
+      question:"Choose the correct HTML element for the largest heading",
       answers:{
         a:"heading",
         b:"head",
