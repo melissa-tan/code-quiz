@@ -1,7 +1,7 @@
 let highscore = 0;
 let initials = document.getElementById("result-name").value;
 let scoreArray = [];
-let user;
+
 
 /* const timer = 60;
 const timerCount;
@@ -28,6 +28,7 @@ const scoreSubmitEl = document.querySelector("#submit");
 const viewHighscoreEl = document.querySelector("#highscore");
 const scoreListEl = document.querySelector("#score-list");
 const clearScoreEl = document.querySelector("#clear");
+const tableEl = document.querySelector("#table");
 
 startQuizEl.addEventListener("click", startQuiz);
 optionAEl.addEventListener("click", selectAnswer);
@@ -121,43 +122,48 @@ function setScore(){
 }
 
 function submitScore(){
-    let initials = document.getElementById("result-name").value;
-  const user = {
-    name: initials,
-    score: highscore
-  }
+  let initials = document.getElementById("result-name").value;
+  let object;
+  var user =
+    {
+      name: initials,
+      score: highscore
+    };
   if(initials === ""){
     alert("Initials cannot be blank");
-  } else{
-    localStorage.setItem("user", JSON.stringify(user));
-    resultEl.classList.add("hide");
-    viewHighscore();
+  } else if (user.name != "" || user.score != 0) {
+    var storage = JSON.parse(localStorage.getItem("user"));
+  
+    if(storage != null){
+      storage.push(user);
+      object = storage
+    } else {
+      object = [user]
+    }
+    var jsonObject = JSON.stringify(object);
+    localStorage.setItem("user",jsonObject);
   }
+  resultEl.classList.add("hide");
+  viewHighscore();
 
 }
 
 function viewHighscore(){
   highscoreEl.classList.remove("hide");
-  var storage = localStorage.getItem("user");
-  if (storage === null) {
-    storage = [];
-} else {
-    storage = JSON.parse(user);
-}
-/*   console.log(localStorage);
-  scoreListEl.textContent = localStorage;
-  for(i=0; i<scoreArray.length; i++){
-      scoreListEl.textContent = "User: " + initials + ", Score: " + highscore;
+  instEl.classList.add("hide");
+  questionEl.classList.add("hide");
+  resultEl.classList.add("hide");
+
+  var storage = JSON.parse(localStorage.getItem("user"));
+
+  for (var i = 0; i < storage.length; i++) {
+    scoreListEl.innerHTML += "<tr><td>" + storage[i].name + "</td><td> " + storage[i].score + "</td></tr> <br>";
   }
-  for (var key in localStorage) {
-    scoreListEl.textContent = "User: " + key + ", Score: " + localStorage[key];
-    console.log(name + ':' + score);
-  } */
-  console.log(storage);
 }
 
 function clearHighscore(){
-    localStorage.clear();
+    localStorage.removeItem("user");
+    viewHighscore();
 }
 
 const questions = [

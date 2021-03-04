@@ -135,9 +135,11 @@ header{
 
 /* Highscore section styling */
 
-.score{
+.score #table{
     text-align: center;
     font-size: 1.1rem;
+    justify-content: center;
+    align-items: center;
 }
 
 #back:hover{
