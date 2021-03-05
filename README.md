@@ -8,7 +8,7 @@ Website URL: [https://melissa-tan.github.io/code-quiz/](https://melissa-tan.gith
 
 ## Screenshot
 The below video shows the a demo of the Coding quiz. <br />
-![test image size]<img src="./assets/demo/large-code-quize-demo.gif" width="640" height="360">
+<img src="./assets/demo/large-code-quize-demo.gif" width="640" height="360">
 
 ### Submission Requirements
 - 
