@@ -1,7 +1,7 @@
 let highscore = 0;
 let initials = document.getElementById("result-name").value;
 let shuffleQuestion, currentQuestionIndex;
-let timerCount = 60;
+let timerCount = 100;
 
 const instEl = document.querySelector(".instructions");
 const questionEl = document.querySelector(".question");
@@ -110,6 +110,9 @@ function selectAnswer(){
       if (timerCount<0){
         timerEl.textContent = 0;
         clearInterval(timer);
+        questionEl.classList.add("hide");
+        resultEl.classList.remove("hide");
+        setScore();
       } else{
         startTimer();
       }
@@ -117,14 +120,14 @@ function selectAnswer(){
   
   currentQuestionIndex++;
 
-  if(currentQuestionIndex<5){
-    setNextQuestion();
-  } else{
-    clearInterval(timer);
-    questionEl.classList.add("hide");
-    resultEl.classList.remove("hide");
-    setScore();
-  }
+    if(currentQuestionIndex<10){
+      setNextQuestion();
+    } else {
+      clearInterval(timer);
+      questionEl.classList.add("hide");
+      resultEl.classList.remove("hide");
+      setScore();
+    }
   
 }
 
@@ -255,7 +258,7 @@ const questions = [
       answer:"d"
     },
     {
-      question:"Which CSS property controls the text size",
+      question:"Which CSS property controls the text size?",
       answers:{
         a:"font-size",
         b:"size",
@@ -275,7 +278,7 @@ const questions = [
       answer:"d"
     },
     {
-      question:"What is the correct HTML for creating a hyperlink",
+      question:"What is the correct HTML for creating a hyperlink?",
       answers:{
         a:"<a>http://www.google.com</a>",
         b:"<a url = \"http://www.google.com\"> Google.com</a>",
@@ -283,6 +286,56 @@ const questions = [
         d:"<a href = \"http://www.google.com\"> Google.com</a>"
       },
       answer:"d"
+    },
+    {
+      question:"How can you open a link in a new tab/browser window?",
+      answers:{
+        a:"<a href =\"http://www.google.com\" target = \"new\">",
+        b:"<a url = \"http://www.google.com\" target = \"_blank\">",
+        c:"<a href = \"http://www.google.com\" target = \"_blank\">",
+        d:"<a href = \"http://www.google.com\" new>"
+      },
+      answer:"c"
+    },
+    {
+      question:"Which character is used to indicate an end tag?",
+      answers:{
+        a:"/",
+        b:">",
+        c:")",
+        d:"^"
+      },
+      answer:"a"
+    },
+    {
+      question:"Which HTML element defines navigation links?",
+      answers:{
+        a:"<navbar>",
+        b:"<nav>",
+        c:"<navigation>",
+        d:"<navigate>"
+      },
+      answer:"b"
+    },
+    {
+      question:"How do you select an element with id 'demo'?",
+      answers:{
+        a:"*demo",
+        b:"demo",
+        c:".demo",
+        d:"#demo"
+      },
+      answer:"d"
+    },
+    {
+      question:"How do you select elements with class name 'test'?",
+      answers:{
+        a:"test",
+        b:"#test",
+        c:".test",
+        d:"*test"
+      },
+      answer:"c"
     },
 
   ]
