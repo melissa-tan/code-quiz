@@ -3,10 +3,6 @@ let initials = document.getElementById("result-name").value;
 let scoreArray = [];
 
 
-/* const timer = 60;
-const timerCount;
-const quizComplete = false; */
-
 let shuffleQuestion, currentQuestionIndex;
 const instEl = document.querySelector(".instructions");
 const questionEl = document.querySelector(".question");
@@ -29,6 +25,7 @@ const viewHighscoreEl = document.querySelector("#highscore");
 const scoreListEl = document.querySelector("#score-list");
 const clearScoreEl = document.querySelector("#clear");
 const tableEl = document.querySelector("#table");
+const backEl = document.querySelector("#back");
 
 startQuizEl.addEventListener("click", startQuiz);
 optionAEl.addEventListener("click", selectAnswer);
@@ -38,7 +35,18 @@ optionDEl.addEventListener("click", selectAnswer);
 scoreSubmitEl.addEventListener("click", submitScore);
 viewHighscoreEl.addEventListener("click", viewHighscore);
 clearScoreEl.addEventListener("click", clearHighscore);
+backEl.addEventListener("click", homePage);
 
+
+function homePage(){
+  /* instEl.classList.remove("hide");
+  questionEl.classList.add("hide");
+  resultEl.classList.add("hide");
+  highscoreEl.classList.add("hide"); */
+  location.reload();
+  highscore=0;
+  
+}
 /* Start quiz */
 function startTimer() {
     // Sets timer
@@ -63,6 +71,8 @@ function startTimer() {
 
 function startQuiz() {
     instEl.classList.add("hide");
+    highscore=0;
+    initials="";
     shuffleQuestion = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     questionEl.classList.remove("hide");
@@ -141,7 +151,7 @@ function submitScore(){
       object = [user]
     }
     var jsonObject = JSON.stringify(object);
-    localStorage.setItem("user",jsonObject);
+    localStorage.setItem("user", jsonObject);
   }
   resultEl.classList.add("hide");
   viewHighscore();
@@ -153,15 +163,47 @@ function viewHighscore(){
   instEl.classList.add("hide");
   questionEl.classList.add("hide");
   resultEl.classList.add("hide");
+  scoreListEl.classList.add("hide");
 
   var storage = JSON.parse(localStorage.getItem("user"));
+  if (storage != null){
+    storage.sort(compareScore);
+  
 
-  for (var i = 0; i < storage.length; i++) {
-    scoreListEl.innerHTML += "<tr><td>" + storage[i].name + "</td><td> " + storage[i].score + "</td></tr> <br>";
+    let table = document.createElement("table");
+    let tableHeader = document.createElement("tr");
+
+    tableHeader.innerHTML = "<th>Name</th><th>Score</th>"
+    table.append(tableHeader);
+          
+    let tableContent = document.createElement("tbody");
+    table.append(tableContent);
+
+    for (var i = 0; i < storage.length; i++) {
+      let column1 = storage[i].name;
+      let column2 = storage[i].score;
+      let rowContent = document.createElement("tr");
+      console.log(column1 + column2);
+
+      rowContent.innerHTML = "<td>" + column1 + "</td><td>" + column2 + "</td>";
+      tableContent.append(rowContent);
+
+      scoreListEl.classList.remove("hide");
+      scoreListEl.appendChild(table);
+    }
   }
 }
 
+function compareScore(a, b) {
+  if (a.score < b.score) return 1;
+  if (b.score < a.score) return -1;
+  return 0;
+}
+
+
+
 function clearHighscore(){
+    localStorage.clear("user");
     localStorage.removeItem("user");
     viewHighscore();
 }
