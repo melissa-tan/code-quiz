@@ -8,7 +8,10 @@ Website URL: [https://melissa-tan.github.io/code-quiz/](https://melissa-tan.gith
 
 ## Screenshot
 The below video shows the a demo of the Coding quiz.
-![Code Quiz Demo](./assets/demo/code_quiz_demo.mp4)
+![Code Quiz Demo](./assets/demo/code-quiz-demo.gif)
 
 ### Submission Requirements
 - 
+
+### Resources
+Quiz questions are pulled from [https://www.w3schools.com/](https://www.w3schools.com/)
