@@ -11,7 +11,11 @@ The below video shows the a demo of the Coding quiz. <br />
 <img src="./assets/demo/large-code-quize-demo.gif" width="640" height="360">
 
 ### Submission Requirements
-- 
+- When start button clicked, user presented with a question and timer starts
+- Questions automatically generate when user chooses answer
+- 10 seconds removed from timer when user chooses the incorrect answer
+- Results page is shown timer reaches 0 or user answers all 10 questions
+- User is prompted to input initials and save score in the results page
 
 ### Resources
 Quiz questions are pulled from [https://www.w3schools.com/](https://www.w3schools.com/)
