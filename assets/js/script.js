@@ -1,9 +1,8 @@
 let highscore = 0;
 let initials = document.getElementById("result-name").value;
-let scoreArray = [];
-
-
 let shuffleQuestion, currentQuestionIndex;
+let timerCount = 60;
+
 const instEl = document.querySelector(".instructions");
 const questionEl = document.querySelector(".question");
 const resultEl = document.querySelector(".result");
@@ -26,6 +25,7 @@ const scoreListEl = document.querySelector("#score-list");
 const clearScoreEl = document.querySelector("#clear");
 const tableEl = document.querySelector("#table");
 const backEl = document.querySelector("#back");
+const playAgainEl = document.querySelector("#play-again");
 
 startQuizEl.addEventListener("click", startQuiz);
 optionAEl.addEventListener("click", selectAnswer);
@@ -36,15 +36,12 @@ scoreSubmitEl.addEventListener("click", submitScore);
 viewHighscoreEl.addEventListener("click", viewHighscore);
 clearScoreEl.addEventListener("click", clearHighscore);
 backEl.addEventListener("click", homePage);
+playAgainEl.addEventListener("click", homePage);
 
 
 function homePage(){
-  /* instEl.classList.remove("hide");
-  questionEl.classList.add("hide");
-  resultEl.classList.add("hide");
-  highscoreEl.classList.add("hide"); */
   location.reload();
-  highscore=0;
+  highscore = 0;
   
 }
 /* Start quiz */
@@ -52,37 +49,30 @@ function startTimer() {
     // Sets timer
     timer = setInterval(function() {
       timerCount--;
-      timerElement.textContent = timerCount;
-      /* if (timerCount >= 0) {
-        // Tests if win condition is met
-        if (isWin && timerCount > 0) {
-          // Clears interval and stops timer
-          clearInterval(timer);
-          winGame();
-        }
-      } */
+      timerEl.textContent = timerCount;
+  
       // When the time = 0, stops the quiz and timer
       if (timerCount === 0) {
         clearInterval(timer);
-        endQuiz();
+        questionEl.classList.add("hide");
+        resultEl.classList.remove("hide");
       }
     }, 1000);
   }
 
 function startQuiz() {
-    instEl.classList.add("hide");
-    highscore=0;
-    initials="";
-    shuffleQuestion = questions.sort(() => Math.random() - .5)
-    currentQuestionIndex = 0
-    questionEl.classList.remove("hide");
-    setNextQuestion();
-    
-    //startTimer();
-  }
+  instEl.classList.add("hide");
+  highscore=0;
+  initials="";
+  shuffleQuestion = questions.sort(() => Math.random() - .5)
+  currentQuestionIndex = 0
+  questionEl.classList.remove("hide");
+  setNextQuestion();
+  startTimer();
+}
   /* Questions */
   
-  function setNextQuestion() {
+function setNextQuestion() {
   showQuestion(shuffleQuestion[currentQuestionIndex])
 }
 
@@ -114,6 +104,15 @@ function selectAnswer(){
       setTimeout(function(){
         answerResultEl.textContent = "";
       }, 1000);
+    clearInterval(timer);
+    timerCount -= 10;
+      timerEl.textContent = timerCount;
+      if (timerCount<0){
+        timerEl.textContent = 0;
+        clearInterval(timer);
+      } else{
+        startTimer();
+      }
   }
   
   currentQuestionIndex++;
@@ -121,17 +120,21 @@ function selectAnswer(){
   if(currentQuestionIndex<5){
     setNextQuestion();
   } else{
+    clearInterval(timer);
     questionEl.classList.add("hide");
     resultEl.classList.remove("hide");
     setScore();
   }
+  
 }
 
 function setScore(){
+  clearInterval(timer);
   resultScoreEl.textContent = "You got " + highscore + " questions correct!";
 }
 
 function submitScore(){
+  clearInterval(timer);
   let initials = document.getElementById("result-name").value;
   let object;
   var user =
@@ -141,6 +144,7 @@ function submitScore(){
     };
   if(initials === ""){
     alert("Initials cannot be blank");
+    return;
   } else if (user.name != "" || user.score != 0) {
     var storage = JSON.parse(localStorage.getItem("user"));
   
@@ -159,6 +163,7 @@ function submitScore(){
 }
 
 function viewHighscore(){
+  clearInterval(timer);
   highscoreEl.classList.remove("hide");
   instEl.classList.add("hide");
   questionEl.classList.add("hide");
