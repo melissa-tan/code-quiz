@@ -7,7 +7,7 @@ Repository URL: [https://github.com/melissa-tan/code-quiz](https://github.com/me
 Website URL: [https://melissa-tan.github.io/code-quiz/](https://melissa-tan.github.io/code-quiz/)
 
 ## Screenshot
-The below video shows the a demo of the Coding quiz.
+The below video shows the a demo of the Coding quiz. <br />
 ![Code Quiz Demo](./assets/demo/large-code-quiz-demo.gif)
 
 ### Submission Requirements
